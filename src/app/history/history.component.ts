@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {HistoryServiceService} from '../history-service.service'
+import {HistoryServiceService} from '../history-service.service';
+import { DatePipe } from '@angular/common'
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -14,12 +15,13 @@ import {HistoryServiceService} from '../history-service.service'
   ],
 })
 export class HistoryComponent implements OnInit {
-
   dataSource:PeriodicElement[]=[];
   columnsToDisplay = ['id', 'title', 'completed'];
   expandedElement: PeriodicElement | null;
   selected = 'Date';
-  constructor(private historyServiceService:HistoryServiceService) { }
+  id:string;
+  selectedDate:Date;
+  constructor(private historyServiceService:HistoryServiceService,private datePipe:DatePipe) { }
 
   ngOnInit() {
     this.historyServiceService.getTodos().subscribe(res=>{
@@ -29,12 +31,20 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  onSelect(event){
+  onSelect(){
     console.log(this.selected);
   }
 
+  onShow(){
+    if(this.selected=='Date'){
+      let convertedDate =this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
+      console.log(convertedDate);
+    }
+    else{
+      console.log(this.id);
+    }
+  }
 }
-
 
 export interface PeriodicElement {
   userId: number;

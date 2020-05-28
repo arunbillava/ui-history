@@ -10,7 +10,10 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {  MatDatepickerModule, MatNativeDateModule } from '@angular/material';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common'
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon'
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatTableModule,
     HttpClientModule,
@@ -27,9 +31,10 @@ import { MatIconModule } from '@angular/material/icon'
     MatSelectModule,
     MatDatepickerModule,
     MatIconModule,
+    MatButtonModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
